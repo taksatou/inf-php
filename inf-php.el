@@ -29,10 +29,10 @@
 (require 'compile)
 (require 'php-mode)
 
-(defvar inf-php-first-prompt-pattern "^php(.*)[0-9:]+0> *"
+(defvar inf-php-first-prompt-pattern "^php > *"
   "First prompt regex pattern of php interpreter.")
 
-(defvar inf-php-prompt-pattern "^\\(php(.*)[0-9:]+[>*\"'] *\\)+"
+(defvar inf-php-prompt-pattern "^php > *"
   "Prompt regex pattern of php interpreter.")
 
 (defvar php-prev-l/c-dir/file nil
