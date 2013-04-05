@@ -56,7 +56,7 @@ Used for determining the default in the next one.")
 
 (defvar inf-php-mode-map
   (let ((map (copy-keymap comint-mode-map)))
-    (define-key map (kbd "C-c C-l") 'inf-php-load-file)
+;    (define-key map (kbd "C-c C-l") 'inf-php-load-file)
     (define-key map (kbd "C-x C-e") 'php-send-last-sexp)
     (define-key map (kbd "TAB") 'inf-php-complete-or-tab)
     map)
@@ -71,7 +71,7 @@ Used for determining the default in the next one.")
   (define-key php-mode-map "\C-c\C-r" 'php-send-region)
   (define-key php-mode-map "\C-c\M-r" 'php-send-region-and-go)
   (define-key php-mode-map "\C-c\C-z" 'php-switch-to-inf)
-  (define-key php-mode-map "\C-c\C-l" 'php-load-file)
+;  (define-key php-mode-map "\C-c\C-l" 'php-load-file)
   (define-key php-mode-map "\C-c\C-s" 'inf-php))
 
 (defvar inf-php-buffer nil "Current php-cli process buffer.")
