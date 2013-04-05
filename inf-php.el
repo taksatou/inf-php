@@ -13,11 +13,16 @@
 ;; inf-php.el provides a REPL buffer connected to an php interactive shell.
 ;; Most codes are derived from inf-ruby.el ;)
 ;;
+;;; Usage
+;; put inf-php.el to load path, and add following code to your .emacs
+;; 
+;; (require 'inf-php)
+;;
 ;;; TODO
-;;; * syntax highlight
-;;; * fix completion
-;;; * support load file
-;;; * better implementation
+;; * syntax highlight
+;; * fix completion
+;; * support load file
+;; * better implementation
 
 
 (require 'comint)
@@ -45,6 +50,9 @@ Used for determining the default in the next one.")
 (defvar inf-php-runner-script-path "/tmp/inf-php.sh"
   "Path to runner script, which is used to launch php interactive
   shell on emacs, a dirty work around :(")
+
+(defvar inf-php-enable-launch-workaround nil
+  "The value t enable launcher script.")
 
 (defvar inf-php-mode-map
   (let ((map (copy-keymap comint-mode-map)))
@@ -194,7 +202,11 @@ prompts for which Php implementation to use. Runs the hooks
 `inf-php-mode-hook' \(after the `comint-mode-hook' is run)."
 
   (interactive)
-  (run-php (format "sh %s" inf-php-runner-script-path) "php"))
+  (if inf-php-enable-launch-workaround
+      (progn
+        (shell-command (format "echo 'php -a >/dev/null && php -a' > %s" inf-php-runner-script-path))
+        (run-php (format "sh %s" inf-php-runner-script-path) "php"))
+    (run-php "php -a" "php")))
 
 (defun run-php (&optional command name)
   "Run an inferior Php process, input and output via buffer *php*.
@@ -205,9 +217,9 @@ of `php-program-name').  Runs the hooks `inferior-php-mode-hook'
 \(Type \\[describe-mode] in the process buffer for a list of commands.)"
 
   (interactive)
-  (setq command (or command (format "sh %s" inf-php-runner-script-path)))
+  (setq command (or command "php -a"))
   (setq name (or name "php"))
-  (shell-command (format "echo 'php -a >/dev/null && php -a' > %s" inf-php-runner-script-path))
+  
 
   (if (not (comint-check-proc inf-php-buffer))
       (let ((commandlist (split-string command)))
