@@ -2,10 +2,11 @@
 
 ;; Copyright (C) 2013 Takayuki Sato
 
-;; Authors: Takayuki Sato
+;; Author: Takayuki Sato
 ;; Created: 5 April 2013
 ;; Keywords: languages php
 ;; Version: 0.1.0
+;; URL: https://github.com/taksatou/inf-php
 ;; Package-Requires: ((php-mode "1.5.0"))
 
 ;;; Commentary:
